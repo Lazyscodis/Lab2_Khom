@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Lab2.Models.TicketModel>
+
+@{
+    ViewData["Title"] = "Список билетов";
+}
+
+<div class="container mt-5">
+    <div class="text-center mb-4">
+        <h1 class="display-4">Список билетов</h1>
+    </div>
+
+    <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th>Маршрут</th>
+            <th>Класс</th>
+            <th>Цена</th>
+            <th>Станция</th>
+            <th>Действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var ticket in Model)
+        {
+            <tr>
+                <td>@ticket.Route</td>
+                <td>@ticket.Class</td>
+                <td>@ticket.Price</td>
+                <td>@ticket.Station?.Name</td>
+                <td>
+                    <a href="@Url.Action("Edit", "Tickets", new { id = ticket.Id })" class="btn btn-warning mx-2">Редактировать</a>
+                    <a href="@Url.Action("Delete", "Tickets", new { id = ticket.Id })" class="btn btn-danger mx-2">Удалить</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+    <div class="text-center mt-4">
+        <a href="@Url.Action("Create", "Tickets")" class="btn btn-primary mx-2">Добавить билет</a>
+    </div>
+</div>
